@@ -1,7 +1,7 @@
 package entity;
 import java.sql.Date; 
 
-public class User{
+public class Usuario{
 	private int idUsuario;
 	private String nombres;
 	private String apellidos;
