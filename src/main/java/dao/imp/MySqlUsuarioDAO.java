@@ -1,5 +1,6 @@
 package dao.imp;
 
+import java.util.List;
 import dao.UsuarioDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,20 +9,17 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 import entity.Usuario;
 import util.MySqlDBConnection;
-import java.util.List;
 import entity.Opcion;
 
 
 
 
-public class MySqlUserDAO implements UsuarioDAO{
+public class MySqlUsuarioDAO implements UsuarioDAO{
 
 	private static Logger log = Logger.getLogger(MySqlUserDAO.class.getName());
 
-	
-		@Override
-		public Usuario login(Usuario bean )throws Exception{
-		
+	@Override
+	public Usuario login(Usuario bean) throws Exception{
 		Connection cn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -56,10 +54,36 @@ public class MySqlUserDAO implements UsuarioDAO{
 									 f.printStackTrace();
 						  }
 				}
-		 	return obj; 
+			 	return obj; 
 	}
 
-	@Override
-	public   List<Opcion> getUserLink(int idUsuario) throws Exception{
+
+	public List<Opcion> getUserLink(int idUsuario) throws Exception{
+		Connection cn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Opcion> data = new ArrayList<Opcion>();
+		Opcion obj = null;
+
+			try{
+				 cn = MySqlDBConnection.getCn();
+				 String query="select p.idOpcion, p.nombre, p.ruta, p.estado,"+
+								  "p.tipo from Opcion p inner join Rol_Has_Opcion r"+
+								  "on p.idOpcion = r.idOpcion inner join Rol c "+
+								  "on r.idRol = c.idRol inner join Usuario_Has_Rol h"+
+								  "on c.idRol=h.idRol where idUsuario=? order by 2;";
+				 ps=cn.prepareStatement(query);
+				 ps.setInt(1,idUsuario);
+				 log.info(">>" + ps);
+				 rs = ps.executeQuery();
+				 	while(rs.next()){
+							obj = new Opcion();
+							obj.setIdOpcion(rs.getInt(1));
+					}
+			}catch(Exception e){
+
+			}finally{
+
+			}
 	}
 }

@@ -1,11 +1,11 @@
 package factory;
 
 import dao.imp.MySqlUserDAO;
-import dao.UserDAO;
+import dao.UsuarioDAO;
 
 public class FactoryMySql extends Factory{
 		  
-		  public UserDAO getUserDAO(){
+		  public UsuarioDAO getUsuarioDAO(){
 					 return new MySqlUserDAO();
 		  }
 }

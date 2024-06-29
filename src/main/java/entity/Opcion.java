@@ -2,26 +2,44 @@ package entity;
 
 public class Opcion{
 
-	private int idRol;
-	private String estado;
-	
-	//Setters and Getter
-	public void setIdRol(int idRol){
-			  this.idRol=idRol;
+	private int idOpcion;
+	private String nombre;
+	private String ruta;
+	private int estado;
+	private int tipo;
+
+	public int getIdOpcion(){
+			  return idOpcion;
 	}
-	public int getIdRol(){
-		return idRol;
-	}
-	
-	public void setEstado(String estado){
-			  this.estado = estado;
-	}
-	public String getEstado(){
-			  return estado;
-	}
-	public Opcion(int idRol, String estado){
-			  this.idRol=idRol;
-			  this.estado=estado;
+	public void setIdOpcion(int idOpcion){
+			  this.idOpcion=idOpcion;
 	}
 
+	public String getNombre(){
+			  return nombre;
 	}
+	public void setNombre(String nombre){
+			  this.nombre=nombre;
+	}
+	public String getRuta(){
+			  return ruta;
+	}
+	public void setRuta(String ruta){
+			  this.ruta=ruta;
+	}
+	public int getTipo(){
+			  return tipo;
+	}
+
+	public void setEstado(int estado){
+		this.estado=estado;
+	}
+	public int getEstado(){
+			  return estado;
+	}
+
+	public void setTipo(int tipo){
+			  this.tipo=tipo;
+	}
+	//Setters and Getter
+}
