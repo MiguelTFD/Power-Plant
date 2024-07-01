@@ -13,9 +13,9 @@ public abstract class Factory{
 			public static Factory getFactory(int type){
 					  Factory out = null;
 					  switch(type){
-								 case MYSQL:
-											out = new FactoryMySql();
-											break;
+						  case MYSQL:
+							  out = new FactoryMySql();
+							  break;
 					  }
 					  return out;
 			}
