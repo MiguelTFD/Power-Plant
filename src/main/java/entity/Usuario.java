@@ -16,6 +16,7 @@ public class Usuario{
 
 	private Rol rol;
 
+
 	//func nombre+apellidos
 	public String getNombreCompleto(){
 		return nombres.concat(" ").concat(apellidos);

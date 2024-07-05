@@ -6,17 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Home</title>
 
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/bootstrapValidator.js"></script>
-<script type="text/javascript" src="js/global.js"></script>
+   	<script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrapValidator.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
 
-
- <link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/bootstrap.css"/>
-    <link rel="stylesheet" href="css/bootstrapValidator.css"/>
+<link rel="stylesheet" href="css/bootstrap.css"/>
+<link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
+<link rel="stylesheet" href="css/bootstrapValidator.css"/>
 
 
     <style>
@@ -28,12 +27,57 @@
             margin: auto;
         }
 
+/* General table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Vertical table styles */
+table.vertical {
+  display: block;
+}
+
+table.vertical thead {
+  display: none;
+}
+
+table.vertical tr {
+  display: block;
+  margin-bottom: 10px;
+}
+
+table.vertical td {
+  display: block;
+  text-align: right;
+  padding-left: 50%;
+  position: relative;
+}
+
+table.vertical td::before {
+  content: attr(data-label);
+  position: absolute;
+  left: 10px;
+  width: calc(50% - 20px);
+  text-align: left;
+  font-weight: bold;
+  color: #333;
+}
+
+
+
     </style>
 
 </head>
 <body>
 <%
-    // Establece una variable de sesión para indicar que navs.jsp está siendo incluido
+
     session.setAttribute("includeNavs", true);
 %>
 <jsp:include page="navs.jsp"/>
@@ -45,56 +89,32 @@
 <div class="container" >
 <div class="layout">
 <table id="id_table" class="userdata" >
-  <tr>
-    <th>Nombres:</th>
-    <td>${sessionScope.Objusuario.nombreCompleto}</td>
-  </tr>
 
-  <tr>
-    <th>DNI:</th>
-    <td>${sessionScope.Objusuario.dni}</td>
-  </tr>
+    <thead style='background-color:#337ab7; color:white'>
+					<tr>
+						<th>Nombres</th>
+						<th>DNI</th>
+						<th>Username</th>
+						<th>Password</th>
+						<th>Correo</th>
+						<th>F.Nacimiento</th>
+						<th>Direccion</th>
+						<th>Cargo</th>
 
-  <tr>
-    <th>Username:</th>
-    <td>${sessionScope.Objusuario.login}</td>
-  </tr>
+					</tr>
+				</thead>
+				<tbody>
 
-    <tr>
-    <th>Password:</th>
-    <td>${sessionScope.Objusuario.password}</td>
-  </tr>
 
-  <tr>
-    <th>Correo:</th>
-    <td>${sessionScope.Objusuario.correo}</td>
-  </tr>
+				</tbody>
 
-   <tr>
-    <th>F.Nacimiento:</th>
-    <td>${sessionScope.Objusuario.fechaNacimiento}</td>
-  </tr>
-
-  <tr>
-    <th>Direccion:</th>
-    <td>${sessionScope.Objusuario.direccion}</td>
-  </tr>
-  <button type="button" class="btn btn-info btn-sm" onClick="verFormularioActualiza(
+<button type="button" class="btn btn-info btn-sm" onClick="verFormularioActualiza(
                     '${sessionScope.Objusuario.idUsuario}',
-                    '${sessionScope.Objusuario.nombreCompleto}',
-                    '${sessionScope.Objusuario.dni}',
                     '${sessionScope.Objusuario.login}',
                     '${sessionScope.Objusuario.password}',
                     '${sessionScope.Objusuario.correo}',
-                    '${sessionScope.Objusuario.fechaNacimiento}',
                     '${sessionScope.Objusuario.direccion}',
-                    '${sessionScope.Objusuario.getRol().nombre}'
                 );">Editar</button>
-    <tr>
-    <th>Cargo:</th>
-    <td>${sessionScope.Objusuario.getRol().nombre}</td>
-  </tr>
-
 </table>
 
  <!-- INICIO MODAL DE ACTUALIZA -->
@@ -118,22 +138,6 @@
                                         <div class="panel-body">
 
 
-
-                                            <div class="form-group">
-                                                <label class="col-lg-3 control-label" for="id_act_nombres">Nombre completo</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" id="id_act_nombres" name="nombres" placeholder="..." type="text" maxlength="100"/>
-                                                </div>
-                                            </div>
-
-                                            <!--Cantidad de alumnos-->
-                                            <div class="form-group">
-                                                <label class="col-lg-3 control-label" for="id_act_dni">Dni</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" id="id_act_dni" type="text" name="dni"/>
-                                                </div>
-                                            </div>
-
                                             <!--Recursos-->
                                             <div class="form-group">
                                                 <label class="col-lg-3 control-label" for="id_act_loggin">Loggin</label>
@@ -145,7 +149,7 @@
                                             <div class="form-group">
                                                 <label class="col-lg-3 control-label" for="id_act_password">Password</label>
                                                 <div class="col-lg-8">
-                                                    <input class="form-control" id="id_act_password" type="text" name="dni"/>
+                                                    <input class="form-control" id="id_act_password" type="text" name="password"/>
                                                 </div>
                                             </div>
 
@@ -157,13 +161,6 @@
                                                 </div>
                                             </div>
 
-                                              <!--FRegistro-->
-                                            <div class="form-group">
-                                                <label class="col-lg-3 control-label" for="id_act_fnac">Fecha Nacimiento</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" id="id_act_fnac" type="date" name="nacimiento"/>
-                                                </div>
-                                            </div>
 
                                                 <!--FRegistro-->
                                             <div class="form-group">
@@ -172,15 +169,6 @@
                                                     <input class="form-control" id="id_act_dir" type="text" name="direccion"/>
                                                 </div>
                                             </div>
-
-                                                 <div class="form-group">
-                                                <label class="col-lg-3 control-label" for="id_act_rol">Cargo</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" id="id_act_rol" type="text" name="rol"/>
-                                                </div>
-                                            </div>
-
-
 
 
                                             <div class="form-group">
@@ -207,21 +195,145 @@
 </div>
 
 <script type="text/javascript">
-       function verFormularioActualiza(idUsuario,nombres, dni, login, password, correo, fnac, direccion, rol){
+       function verFormularioActualiza(idUsuario,login, password, correo, direccion){
                 console.log(">> verFormularioActualiza >> " + idUsuario);
                 $("#id_div_modal_actualiza").modal("show");
                 $("#idUsuario").val(idUsuario);
-                $("#id_act_nombres").val(nombres);
-                $("#id_act_dni").val(dni);
-
                 $("#id_act_loggin").val(login);
+
                 $("#id_act_password").val(password);
                 $("#id_act_correo").val(correo);
-                $("#id_act_fnac").val(fnac);
                 $("#id_act_dir").val(direccion);
-                $("#id_act_rol").val(rol);
-            }
 
+       }
+
+
+		function agregarGrilla(lista){
+			 $('#id_table').DataTable().clear();
+			 $('#id_table').DataTable().destroy();
+			 $('#id_table').DataTable({
+					data: lista,
+					language: IDIOMA,
+					searching: false,
+					ordering: false,
+					processing: true,
+					pageLength: 1,
+					lengthChange: false,
+					info:true,
+					scrollY: 305,
+			        scroller: {
+			            loadingIndicator: true
+			        },
+					columns:[
+						{data: "usuario",className:'text-center'},
+						{data: "dni",className:'text-center'},
+						{data: "login",className:'text-center'},
+						{data: "password",className:'text-center'},
+						{data: "correo", className:'text-center'},
+						{data: "fechaNacimiento",className:'text-center'},
+                        {data: "direccion", className:'text-center'},
+                        {data: "rol.nombre", className:'text-center'},
+					]
+			    });
+		}
+
+
+
+
+		$("#id_btn_actualiza").click(function() {
+			var validator = $('#id_form_actualiza').data('bootstrapValidator');
+		    validator.validate();
+
+		    if (validator.isValid()) {
+		        $.ajax({
+			          type: "POST",
+			          url: "datosUsuario",
+			          data: $('#id_form_actualiza').serialize(),
+			          success: function(data){
+			        	  mostrarMensaje(data.mensaje);
+                          agregarGrilla(data.datos);
+			        	  validator.resetForm();
+			        	  $('#id_div_modal_actualiza').modal("hide");
+			          },
+			          error: function(){
+			        	  mostrarMensaje(MSG_ERROR);
+			          }
+			    });
+		    }
+		});
+
+
+		$(document).ready(function() {
+		    $('#id_form_actualiza').bootstrapValidator({
+		        message: 'This value is not valid',
+		        feedbackIcons: {
+		            valid: 'glyphicon glyphicon-ok',
+		            invalid: 'glyphicon glyphicon-remove',
+		            validating: 'glyphicon glyphicon-refresh'
+		        },
+
+		        fields:{
+		        	correo : {
+		        		selector: "#id_act_correo",
+		        		validators : {
+		        			notEmpty: {
+		                        message: 'El correo es un campo requerido'
+		                    },
+		        		}
+		        	},
+		        	direccion : {
+		        		selector: "#id_act_direccion",
+		        		validators : {
+		        			notEmpty: {
+		                        message: 'La Direccion es requerida'
+		                    },
+		                    stringLength: {
+		                        min: 4,
+		                        max: 40,
+		                        message: 'la direccion deve de tener entre 4-40 Caracteres (Av. Lima Lim�n 78487)'
+		                    },
+		        		}
+		        	},
+		        	login : {
+		        		selector: "#id_act_loggin",
+		        		validators : {
+		        			notEmpty: {
+		                        message: 'Debes tener un Username'
+		                    },
+		                    stringLength: {
+		                        max: 15,
+		                        message: 'Username muy largo'
+		                    },
+		        		}
+		        	},
+		        	password : {
+		        		selector: "#id_act_password",
+		        		validators : {
+		        			notEmpty: {
+		                        message: 'El password es requerido'
+		                    },
+		        		}
+		        	},
+
+		        }
+		    });
+		});
+
+
+        $(document).ready(function() {
+        $.ajax({
+            url: 'datosUsuario',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                agregarGrilla(data);
+                console.log(data);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al cargar los datos: ' + error);
+            }
+        });
+    });
 
 </script>
 

@@ -196,7 +196,7 @@ public class MySqlUsuarioDAO implements UsuarioDAO{
 			ps.setInt(5, bean.getIdUsuario());
 
 			out=ps.executeUpdate();
-			System.out.println("Usuario Actualizado Exitosamente");
+			System.out.println("Usuario Actualizado Exitosamente"+query);
 
 		}catch(Exception e){
             e.printStackTrace();

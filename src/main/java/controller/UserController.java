@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,24 +38,43 @@ public class UserController extends HttpServlet  {
         }
     }
 
-    protected void lista(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-          System.out.println("[ini] lista");
+     protected void lista(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("[ini] lista");
 
-          String id = req.getParameter("id");
+        // Obtener la sesión
+        HttpSession session = req.getSession(false);
 
-        Factory factory = Factory.getFactory(Factory.MYSQL);
+        if (session != null) {
+            // Obtener el usuario de la sesión
+            Usuario usuario = (Usuario) session.getAttribute("Objusuario");
 
-        UsuarioDAO daoUsuario = factory.getUsuarioDAO();
+            if (usuario != null) {
+                // Obtener el ID del usuario
+                int idUsuario = usuario.getIdUsuario();
+                System.out.println("ID del usuario: " + idUsuario);
 
-        List<Usuario> lstUsuario = daoUsuario.listarUsuario(Integer.parseInt(id));
+                Factory factory = Factory.getFactory(Factory.MYSQL);
 
-        Gson gson = new Gson();
-        String json = gson.toJson(lstUsuario);
-        resp.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = resp.getWriter();
-        out.println(json);
-        System.out.println("[fin] lista");
-    }
+                UsuarioDAO daoUsuario = factory.getUsuarioDAO();
+
+                List<Usuario> lstUsuario = daoUsuario.listarUsuario(idUsuario);
+
+                Gson gson = new Gson();
+                String json = gson.toJson(lstUsuario);
+                resp.setContentType("application/json;charset=UTF-8");
+                PrintWriter out = resp.getWriter();
+                out.println(json);
+                System.out.println("[fin] lista");
+            } else {
+                System.out.println("No se encontró el usuario en la sesión.");
+                resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No se encontró el usuario en la sesión.");
+            }
+        } else {
+            System.out.println("No se encontró una sesión activa.");
+            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No se encontró una sesión activa.");
+        }
+	 }
+
     private void actualiza(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("[ini] actualiza");
 
@@ -62,14 +82,13 @@ public class UserController extends HttpServlet  {
 		UsuarioDAO daoUsuario = subFabrica.getUsuarioDAO();
 
 		String _idU =req.getParameter("idUsuario");
-        String _nom = req.getParameter("nombres");
+
 
 		String _cor = req.getParameter("correo");
-		String _dni = req.getParameter("dni");
+
 		String _usr = req.getParameter("username");
 		String _pas = req.getParameter("password");
 		String _dir = req.getParameter("direccion");
-		String _fna = req.getParameter("nacimiento");
 
 
 
@@ -77,26 +96,10 @@ public class UserController extends HttpServlet  {
 		Usuario usuario_= new Usuario();
 
 		usuario_.setIdUsuario(Integer.parseInt(_idU));
-		usuario_.setNombres(_nom);
-		usuario_.setDni(_dni);
 		usuario_.setLogin(_usr);
 		usuario_.setPassword(_pas);
 		usuario_.setCorreo(_cor);
 		usuario_.setDireccion(_dir);
-
-    if (_fna != null && !_fna.isEmpty()) {
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date parsedDate = dateFormat.parse(_fna);
-            java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
-            usuario_.setFechaNacimiento(sqlDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-
-        }
-    }
-
-    usuario_.setDireccion(_dir);
 
 		Respuesta objRespuesta = new Respuesta();
 		int salida = daoUsuario.actualizarUsuario(usuario_);
