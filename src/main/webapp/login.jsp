@@ -7,7 +7,8 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrapValidator.js"></script>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/bootstrapValidator.css">
 
@@ -25,38 +26,38 @@ background: linear-gradient(to right, rgb(167, 196, 94), rgb(159, 202, 55))
 }
   .her{
     background-color:#FFFBA7 ;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
   }
 
   .bg-dark{
     background-color: #FFA9A9 !important;
   }
-  .card{
+  #crd{
     border-radius: 50px !important;
-    height: 550px !important;
+
 
   }
 .form-control::placeholder ,.form-control-lg,.form-control-lg:focus{ /* Chrome, Firefox, Opera, Safari 10.1+ */
-            color: #D0BB83;
-            opacity: 1; /* Firefox */
-            background-color: #FFFBA7;
-            border-radius: 30px;
+            color: #D0BB83 !important;
+            opacity: 1 !important; /* Firefox */
+            background-color: #FFFBA7 !important;
+            border-radius: 30px !important;
 
 }
 
 .form-control:-ms-input-placeholder ,.form-control-lg,.form-control-lg:focus{ /* Internet Explorer 10-11 */
-            color: #D0BB83;
-             background-color: #FFFBA7;
-              border-radius: 30px;
+            color: #D0BB83 !important;
+             background-color: #FFFBA7 !important;
+              border-radius: 30px !important;
 
 }
 
 .form-control::-ms-input-placeholder,.form-control-lg, .form-control-lg:focus{ /* Microsoft Edge */
-            color: #D0BB83;
-             background-color: #FFFBA7;
-              border-radius: 30px;
+            color: #D0BB83 !important;
+             background-color: #FFFBA7 !important;
+              border-radius: 30px !important;
 
  }
 .form-control::placeholder {
@@ -65,19 +66,19 @@ background: linear-gradient(to right, rgb(167, 196, 94), rgb(159, 202, 55))
 }
 #carni{
     position: absolute;
-    top: 15%;  /* Ajusta según sea necesario */
-    left: 50%;   /* Centra horizontalmente */
-    transform: translateX(-50%);  /* Para centrar realmente el SVG */
-    z-index: 10; /* Asegúrate de que esté encima del contenido */
+    top: 15% !important;  /* Ajusta según sea necesario */
+    left: 50% !important;   /* Centra horizontalmente */
+    transform: translateX(-50%) !important;  /* Para centrar realmente el SVG */
+    z-index: 10 !important; /* Asegúrate de que esté encima del contenido */
 }
 .btn {
-  border-radius: 50px;
-  font-size: 30px;
-  background-color: #F9D1D1;
+  border-radius: 50px !important;
+  font-size: 30px !important;
+  background-color: #F9D1D1 !important;
 }
 .btn:hover {
-  background-color: white;
-  color: #1a1d20;
+  background-color: white !important;
+  color: #1a1d20 !important;
 }
 </style>
 
@@ -124,10 +125,11 @@ background: linear-gradient(to right, rgb(167, 196, 94), rgb(159, 202, 55))
         <div class="container py-5 h-100" >
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-              <div class="card bg-dark text-white" style="border-radius: 1rem;position: relative">
+              <div id="crd" class="card bg-dark text-white" style="border-radius: 1rem;position: relative">
                 <div class="card-body p-5 text-center">
 
                   <div class="mb-md-5 mt-md-4 pb-5">
+
                         <form id="id_form" action="login" method="post" class="login-form">
 
                             <div data-mdb-input-init class="form-outline form-white mb-4">
@@ -136,11 +138,11 @@ background: linear-gradient(to right, rgb(167, 196, 94), rgb(159, 202, 55))
                             </div>
 
                             <div data-mdb-input-init class="form-outline form-white mb-4">
-                              <input type="password" id="form-password" name="password" class="form-control form-control-lg" placeholder="Contra&#241;eña" style="padding: 20px"/>
+                              <input type="password" id="form-password" name="password" class="form-control form-control-lg" placeholder="Contraeña" style="padding: 20px"/>
                               <label class="sr-only" for="form-password"></label>
                             </div>
 
-                            <p class="fs-3 mb-5 pb-lg-2"><a class="text-white-50" href="#!">Olvidaste tu contrase&#241;a?</a></p>
+                            <p class="fs-3 mb-5 pb-lg-2"><a class="text-white-50" href="#!">Olvidaste tu contraseña?</a></p>
 
                             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-lg px-5" type="submit">Login</button>
                     </form>

@@ -35,16 +35,16 @@ public class LoginController extends HttpServlet {
                 Usuario usuario1 = dao.login(bean);
                     if(usuario1 == null){
 
-                        String msg = "El usuario no existe";
-                        req.setAttribute("msg", msg);
+                        String mensaje = "El usuario no existe";
+                        req.setAttribute("mensaje", mensaje);
                         req.getRequestDispatcher("login.jsp").forward(req, resp);
                     }
                     else {
-                          HttpSession session = req.getSession();
+                        HttpSession session = req.getSession();
                         session.setAttribute("Objusuario", usuario1);
                         List<Opcion> menus = dao.getUserLink(usuario1.getIdUsuario());
                         session.setAttribute("Objmenus", menus);
-                        resp.sendRedirect("index.jsp");
+                        resp.sendRedirect("home.jsp");
 
                     }
             }catch(Exception e){

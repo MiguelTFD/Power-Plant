@@ -12,4 +12,8 @@ public interface UsuarioDAO{
 	//Enlaces
 	public abstract List<Opcion> getUserLink(int idUsuario) throws Exception;
 
+	public abstract List<Usuario> listarUsuario(int id);
+
+	public abstract int actualizarUsuario(Usuario bean) ;
+
 }
