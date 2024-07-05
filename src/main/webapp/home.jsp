@@ -90,23 +90,40 @@ table.vertical td::before {
 <div class="layout">
 <table id="id_table" class="userdata" >
 
-    <thead style='background-color:#337ab7; color:white'>
-					<tr>
-						<th>Nombres</th>
-						<th>DNI</th>
-						<th>Username</th>
-						<th>Password</th>
-						<th>Correo</th>
-						<th>F.Nacimiento</th>
-						<th>Direccion</th>
-						<th>Cargo</th>
+   <tr>
+    <th>Nombres:</th>
+    <td>${sessionScope.Objusuario.nombreCompleto}</td>
+  </tr>
 
-					</tr>
-				</thead>
-				<tbody>
+  <tr>
+    <th>DNI:</th>
+    <td>${sessionScope.Objusuario.dni}</td>
+  </tr>
 
+  <tr>
+    <th>Username:</th>
+    <td>${sessionScope.Objusuario.login}</td>
+  </tr>
 
-				</tbody>
+    <tr>
+    <th>Password:</th>
+    <td>${sessionScope.Objusuario.password}</td>
+  </tr>
+
+  <tr>
+    <th>Correo:</th>
+    <td>${sessionScope.Objusuario.correo}</td>
+  </tr>
+
+   <tr>
+    <th>F.Nacimiento:</th>
+    <td>${sessionScope.Objusuario.fechaNacimiento}</td>
+  </tr>
+
+  <tr>
+    <th>Direccion:</th>
+    <td>${sessionScope.Objusuario.direccion}</td>
+  </tr>
 
 <button type="button" class="btn btn-info btn-sm" onClick="verFormularioActualiza(
                     '${sessionScope.Objusuario.idUsuario}',

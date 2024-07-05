@@ -119,7 +119,7 @@ public class MySqlUsuarioDAO implements UsuarioDAO{
             cn= MySqlDBConnection.getCn();
 
             //Crear la query
-            String sql = "SELECT U.*,R.nombre FROM Usuario U  JOIN Usuario_Has_Rol UH ON U.idUsuario = UH.idUsuario Join Rol R on Uh.idRol =R.idRol where U.idUsuario = ?";
+            String sql = "SELECT U.*,R.* FROM Usuario U  JOIN Usuario_Has_Rol UH ON U.idUsuario = UH.idUsuario Join Rol R on UH.idRol =R.idRol where U.idUsuario = ?";
             //que el preparedsTATEMENT sea de la conexion
             ps = cn.prepareStatement(sql);
             ps.setInt(1,id);
