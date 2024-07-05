@@ -8,11 +8,14 @@ public class Usuario{
 	private String dni;
 	private String login;
 	private String password;
+	private String image;
 	private String correo;
 	private Date fechaRegistro;
 	private Date fechaNacimiento;
 	private String direccion;
-	
+
+	private Rol rol;
+
 	//func nombre+apellidos
 	public String getNombreCompleto(){
 		return nombres.concat(" ").concat(apellidos);
@@ -66,6 +69,13 @@ public class Usuario{
 	public void setPassword(String password){
 			  this.password=password;
 	}
+	public String getImage(){
+			  return image;
+	}
+
+	public void setImage(String image){
+			  this.image=image;
+	}
 
 	public String getCorreo(){
 			  return correo;
@@ -93,5 +103,13 @@ public class Usuario{
 	}
 	public void setDireccion(String direccion){
 			  this.direccion = direccion;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 }
